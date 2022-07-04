@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateComprasTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('compras', function (Blueprint $table) {
+            $table->integer('IdCompra', true);
+            $table->integer('NumeroRecibo')->nullable();
+            $table->dateTime('FechaRecibo')->nullable();
+            $table->timestamp('FechaRegistro')->useCurrentOnUpdate()->useCurrent();
+            $table->integer('Proveedores_IdProveedor')->index('fk_Compras_Proveedores1_idx');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('compras');
+    }
+}
